@@ -152,20 +152,13 @@ export default function LoginPage() {
             <p className="text-gray-600 text-sm">
               Don't have an account?{" "}
               <Link
-                href="/register"
+                href="/auth/register"
                 className="text-green-600 hover:text-green-700 font-medium transition-colors duration-200"
               >
                 Create one here
               </Link>
             </p>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-xs text-gray-500">
-            © 2024 Waruiru Farm. All rights reserved.
-          </p>
         </div>
       </div>
     </div>

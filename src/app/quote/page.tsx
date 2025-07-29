@@ -354,16 +354,13 @@ export default function QuotePage() {
       <div className="bg-white/80 backdrop-blur-md shadow-lg border-b border-emerald-100 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-gradient-to-br from-emerald-100 to-green-100 rounded-full">
-              <Leaf className="h-8 w-8 text-emerald-600" />
-            </div>
             <h1 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-emerald-600 via-green-600 to-lime-600 bg-clip-text text-transparent">
-              Fresh Produce Quote
+              Produce Quote
             </h1>
           </div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Discover premium quality produce and get instant quotes for your
-            fresh food needs
+            You're about to get farm-fresh produce at fair prices, quick and
+            easy.
           </p>
         </div>
       </div>
@@ -654,7 +651,7 @@ export default function QuotePage() {
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-emerald-500" />
                         <Input
                           id="name"
-                          placeholder="e.g., John Doe"
+                          placeholder="e.g., Saidimu Waruiru"
                           className="pl-11 pr-4 py-3 rounded-xl border border-emerald-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
                           {...register("name")}
                           disabled={isSubmitting}
@@ -680,7 +677,7 @@ export default function QuotePage() {
                         <Input
                           id="email"
                           type="email"
-                          placeholder="e.g., john.doe@example.com"
+                          placeholder="e.g., saidimu.w@example.com"
                           className="pl-11 pr-4 py-3 rounded-xl border border-emerald-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
                           {...register("email")}
                           disabled={isSubmitting}

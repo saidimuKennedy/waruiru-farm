@@ -8,6 +8,7 @@ import CTASection from "@/components/CTASection";
 import AnimatedProcessSection from "@/components/process";
 import { motion } from "framer-motion";
 import ProduceShowcase from "@/components/showcase";
+import Announcement from "@/components/announcement";
 
 const AgriTechLanding = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -50,9 +51,7 @@ const AgriTechLanding = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-
+    <div className="min-h-screen bg-white overflow-hidden">
       <section
         id="home"
         className="relative h-screen flex items-center justify-center text-white"
@@ -103,15 +102,12 @@ const AgriTechLanding = () => {
           </motion.div>
         </div>
       </section>
-
+      {/* announcement */}
+      <Announcement />
       <Services />
-
       <ProduceShowcase />
-
       <AnimatedProcessSection />
-
       <CTASection />
-
       <section
         id="faq"
         className="bg-gradient-to-br from-green-50 to-green-100"

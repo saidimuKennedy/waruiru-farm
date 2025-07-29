@@ -85,7 +85,7 @@ export default function Navbar() {
     return (
       <Button
         className="bg-green-500 hover:bg-green-600 text-white rounded-full px-6 py-3 shadow-lg transition-transform transform hover:scale-105 flex items-center space-x-2"
-        onClick={() => router.push("/login")}
+        onClick={() => router.push("/auth/login")}
       >
         <span>Sign In</span>
       </Button>
@@ -130,7 +130,7 @@ export default function Navbar() {
       <Button
         className="w-full bg-green-500 hover:bg-green-600 text-white rounded-full py-3 shadow-lg"
         onClick={() => {
-          router.push("/login");
+          router.push("/auth/login");
           setIsMenuOpen(false);
         }}
       >
@@ -141,33 +141,34 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
-      <div className="max-w-11xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between px-4 md:px-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between px-4 w-full min-h-[70px]">
           {/* Animated Logo */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="flex items-center space-x-3"
+            className="flex items-center flex-shrink-0"
           >
             <Link href="/">
               <Image
                 src="/waruiru&logo.png"
-                width={100}
-                height={100}
+                width={80}
+                height={80}
                 alt="Waruiru Farm Logo"
+                className="sm:w-[100px] sm:h-[100px]"
               />
             </Link>
           </motion.div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden lg:flex items-center space-x-8 flex-1 justify-center">
             {navItems.map(({ label, href }) => (
               <Link
                 key={label}
                 href={href}
-                className="text-gray-600 hover:text-green-600 transition-colors font-medium"
+                className="text-gray-600 hover:text-green-600 transition-colors font-medium whitespace-nowrap"
               >
                 {label}
               </Link>
@@ -175,9 +176,9 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Auth Button */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
             <Button
-              className="rounded-full px-4 py-2  bg-green-60 border  border-green-500 text-green-600 hover:bg-green-50 transition-colors"
+              className="rounded-full px-4 py-2 bg-green-60 border border-green-500 text-green-600 hover:bg-green-50 transition-colors whitespace-nowrap"
               onClick={() => router.push("/quote")}
             >
               Get Quote
@@ -186,15 +187,16 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden">
+          <div className="lg:hidden flex-shrink-0">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-600 hover:text-green-600"
+              className="text-gray-600 hover:text-green-600 p-2 -mr-2"
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? (
-                <X className="w-8 h-8" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-8 h-8" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -203,23 +205,23 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg rounded-b-xl">
-          <div className="px-4 pt-4 pb-6 space-y-4">
+        <div className="lg:hidden bg-white/95 backdrop-blur-md shadow-lg border-t border-gray-100">
+          <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-70px)] overflow-y-auto">
             {navItems.map(({ label, href }) => (
               <Link
                 key={label}
                 href={href}
-                className="block text-lg text-gray-700 hover:text-green-600 transition-colors font-semibold"
+                className="block text-lg text-gray-700 hover:text-green-600 transition-colors font-semibold py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {label}
               </Link>
             ))}
 
-            <div className="pt-4 border-t border-gray-200">
+            <div className="pt-4 border-t border-gray-200 space-y-3">
               <Button
                 variant="outline"
-                className="w-full mb-3 border-green-500 text-green-600 hover:bg-green-50 rounded-full py-3"
+                className="w-full border-green-500 text-green-600 hover:bg-green-50 rounded-full py-3"
                 onClick={() => {
                   router.push("/quote");
                   setIsMenuOpen(false);

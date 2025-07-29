@@ -91,7 +91,9 @@ const ContactPage = () => {
           style={{ backdropFilter: "blur(4px)" }}
         ></div>
         <div className="relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold">Contact Us</h1>
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-50 via-green-200 to-lime-600 bg-clip-text text-transparent mb-2">
+            Contact Us
+          </h1>
           <p className="text-lg mt-2">We'd love to hear from you!</p>
         </div>
       </div>
@@ -176,7 +178,7 @@ const ContactPage = () => {
                       <Label htmlFor="name">Full Name</Label>
                       <Input
                         id="name"
-                        placeholder="John Doe"
+                        placeholder="Saidimu Waruiru"
                         value={formData.name}
                         onChange={handleChange}
                       />
@@ -192,7 +194,7 @@ const ContactPage = () => {
                       <Input
                         id="email"
                         type="email"
-                        placeholder="john.doe@example.com"
+                        placeholder="saidimu.w@example.com"
                         value={formData.email}
                         onChange={handleChange}
                       />

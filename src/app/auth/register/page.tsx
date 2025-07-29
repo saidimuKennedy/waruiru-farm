@@ -198,20 +198,13 @@ export default function RegisterPage() {
             <p className="text-gray-600 text-sm">
               Already have an account?{" "}
               <Link
-                href="/login"
+                href="/auth/login"
                 className="text-green-600 hover:text-green-700 font-medium transition-colors duration-200"
               >
                 Sign in here
               </Link>
             </p>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-xs text-gray-500">
-            © 2024 Waruiru Farm. All rights reserved.
-          </p>
         </div>
       </div>
     </div>

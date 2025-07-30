@@ -1,12 +1,34 @@
-import Link from "next/link";
 import { getAllPosts } from "@/lib/blog-posts";
-import { Calendar, User } from "lucide-react";
+import BlogContentClient from "@/components/BlogContentClient";
+import { DefaultSession, getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+interface Post {
+  slug: string;
+  imageUrl?: string | null;
+  title: string;
+  date: Date;
+  content: string;
+  author: string;
+  excerpt: string;
+}
 
 const BlogPage = async () => {
-  const posts = await getAllPosts();
+  const posts: Post[] = await getAllPosts();
+  const session = await getServerSession(authOptions);
+
+  const isAdmin = session?.user?.role === "admin";
+
+  // --- ADD THIS CONSOLE.LOG ---
+  console.log("Server-side Session:", JSON.stringify(session, null, 2));
+  // --- END ADDITION ---
+
+  // --- ADD THIS CONSOLE.LOG ---
+  console.log("Is Admin (derived):", isAdmin);
+  // --- END ADDITION ---
+
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Hero Section */}
       <div
         className="relative h-64 bg-cover bg-center flex items-center justify-center text-white"
         style={{
@@ -26,47 +48,7 @@ const BlogPage = async () => {
         </div>
       </div>
 
-      {/* Blog Posts Grid */}
-      <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} passHref>
-              <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div className="overflow-hidden">
-                  <img
-                    src={post.imageUrl || "/waruiru&logo.png"}
-                    alt={post.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
-                    {post.title}
-                  </h2>
-                  <div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      <span>
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <User className="h-4 w-4" /> <span>{post.author}</span>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+      <BlogContentClient posts={posts} isAdmin={isAdmin} />
     </div>
   );
 };

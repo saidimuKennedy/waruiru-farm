@@ -127,7 +127,7 @@ const ContactPage = () => {
                   </h3>
                   <p className="text-gray-600 hover:text-green-600 transition-colors">
                     <a href="mailto:hello@waruirufarm.com">
-                      hello@waruirufarm.com
+                      info@waruirufarm.com
                     </a>
                   </p>
                 </div>
@@ -140,7 +140,7 @@ const ContactPage = () => {
                   <h3 className="text-lg font-semibold text-gray-800">
                     Call Us
                   </h3>
-                  <p className="text-gray-600">+254 700 123 456</p>
+                  <p className="text-gray-600">+254 114-102-575</p>
                 </div>
               </div>
             </div>

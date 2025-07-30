@@ -21,7 +21,10 @@ model User {
   accounts      Account[]
   sessions      Session[]
 }
-
+enum Role{
+  user
+  admin
+}
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -78,12 +81,18 @@ model Post {
   excerpt   String
   date      DateTime
   author    String
-  imageUrl  String?
+  status    PostStatus   @default(DRAFT)
   content   String   @db.Text
+  imageUrl  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
 
 
 model Category {

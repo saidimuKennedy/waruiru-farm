@@ -1,7 +1,7 @@
 import { getAllPosts } from "@/lib/blog-posts";
 import BlogContentClient from "@/components/BlogContentClient";
 import { DefaultSession, getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 interface Post {
   slug: string;

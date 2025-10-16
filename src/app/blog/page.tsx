@@ -1,5 +1,5 @@
 import { getAllPosts } from "@/lib/blog-posts";
-import BlogContentClient from "@/components/BlogContentClient";
+import BlogContentClient from "@/components/blog-content-client";
 import { DefaultSession, getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
@@ -18,14 +18,6 @@ const BlogPage = async () => {
   const session = await getServerSession(authOptions);
 
   const isAdmin = session?.user?.role === "admin";
-
-  // --- ADD THIS CONSOLE.LOG ---
-  console.log("Server-side Session:", JSON.stringify(session, null, 2));
-  // --- END ADDITION ---
-
-  // --- ADD THIS CONSOLE.LOG ---
-  console.log("Is Admin (derived):", isAdmin);
-  // --- END ADDITION ---
 
   return (
     <div className="bg-gray-50 min-h-screen">

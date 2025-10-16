@@ -1,5 +1,5 @@
 // This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// learn more about it in the docs: https://pris.lyd/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -11,16 +11,19 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?       @unique
   emailVerified DateTime?
   image         String?
   password      String?
-  role          String    @default("user")
+  role          String        @default("user")
   accounts      Account[]
   sessions      Session[]
+  ChatSession   ChatSession[]
+  ChatMessage   ChatMessage[] 
 }
+
 enum Role{
   user
   admin
@@ -133,4 +136,61 @@ model Client {
   logo      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+
+model ChatMessage {
+  id              String            @id @default(cuid())
+  sessionId       String
+  userId          String?          
+  session         ChatSession       @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user            User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sender          MessageSender     
+  text            String            @db.Text
+  imageUrl        String?           
+  suggestedAction Json?           
+  createdAt       DateTime          @default(now())
+  
+  @@index([sessionId, createdAt])
+  @@index([userId])
+}
+
+enum MessageSender {
+  USER
+  ASSISTANT
+}
+
+model ChatSession {
+  id        String        @id @default(cuid())
+  userId    String?       
+  user      User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String?      
+  status    String        @default("active") 
+  messages  ChatMessage[] 
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  
+  @@index([userId])
+}
+
+model Problem {
+  id         String          @id @default(cuid())
+  title      String
+  category   String
+  severity   ProblemSeverity
+  image      String          
+  emoji      String?         
+  cause      String[]
+  action     String[]
+  followUp   String[]
+  timeToFix  String
+  difficulty String
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+}
+
+enum ProblemSeverity {
+  LOW
+  MEDIUM
+  HIGH
 }

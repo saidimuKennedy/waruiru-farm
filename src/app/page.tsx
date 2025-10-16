@@ -103,7 +103,7 @@ const AgriTechLanding = () => {
         </div>
       </section>
       {/* announcement */}
-      <Announcement />
+      {/* <Announcement /> */}
       <Services />
       <ProduceShowcase />
       <AnimatedProcessSection />

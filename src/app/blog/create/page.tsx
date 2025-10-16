@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { toast } from "sonner"; // Assuming you have sonner installed and configured
+import { toast } from "sonner";
 import {
   Card,
   CardContent,
@@ -12,6 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import { Editor } from "@tinymce/tinymce-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -35,6 +37,8 @@ export default function CreateBlogPage() {
   const router = useRouter();
   const { data: session, status } = useSession();
 
+  const editorRef = useRef<any>(null);
+
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -47,6 +51,7 @@ export default function CreateBlogPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+
   useEffect(() => {
     if (session?.user?.name && !formData.author) {
       setFormData((prev) => ({ ...prev, author: session.user.name as string }));
@@ -69,9 +74,13 @@ export default function CreateBlogPage() {
 
   useEffect(() => {
     if (formData.content) {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = formData.content;
+      const plainTextContent = tempDiv.textContent || tempDiv.innerText || "";
+
       const generatedExcerpt =
-        formData.content.substring(0, 150) +
-        (formData.content.length > 150 ? "..." : "");
+        plainTextContent.substring(0, 150) +
+        (plainTextContent.length > 150 ? "..." : "");
       setFormData((prev) => ({ ...prev, excerpt: generatedExcerpt }));
     } else {
       setFormData((prev) => ({ ...prev, excerpt: "" }));
@@ -98,9 +107,12 @@ export default function CreateBlogPage() {
     setLoading(true);
     setError(null);
 
+    const plainTextContent = editorRef.current
+      ? editorRef.current.getContent({ format: "text" })
+      : "";
     if (
       !formData.title ||
-      !formData.content ||
+      plainTextContent.trim().length === 0 ||
       !formData.author ||
       !formData.slug
     ) {
@@ -153,8 +165,6 @@ export default function CreateBlogPage() {
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-gray-100 p-4 pt-24 md:pt-32">
-      {" "}
-      {/* Added padding-top to clear fixed navbar */}
       <Card className="w-full max-w-lg">
         <CardHeader>
           <CardTitle>Create Blog Post</CardTitle>
@@ -196,13 +206,31 @@ export default function CreateBlogPage() {
             <div className="grid w-full items-center gap-4 mb-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="content">Content</Label>
-                <Textarea
-                  id="content"
-                  placeholder="Write your blog post content here..."
+                {/* TinyMCE Editor */}
+                <Editor
+                  apiKey="1guysrjcksms9u8xc9tcm9spv2jmqt79cie1ga1cvwhoaw8p"
+                  onInit={(_evt, editor) => (editorRef.current = editor)}
+                  initialValue={formData.content}
                   value={formData.content}
-                  onChange={handleChange}
-                  rows={8}
-                  required
+                  onEditorChange={(newValue) => {
+                    setFormData((prev) => ({ ...prev, content: newValue }));
+                  }}
+                  init={{
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                      "advlist autolink lists link image charmap print preview anchor",
+                      "searchreplace visualblocks code fullscreen",
+                      "insertdatetime media table paste code help wordcount",
+                    ],
+                    toolbar:
+                      "undo redo | formatselect | " +
+                      "bold italic backcolor | alignleft aligncenter " +
+                      "alignright alignjustify | bullist numlist outdent indent | " +
+                      "removeformat | help",
+                    content_style:
+                      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                  }}
                 />
               </div>
             </div>
@@ -216,10 +244,11 @@ export default function CreateBlogPage() {
                   value={formData.excerpt}
                   onChange={handleChange}
                   rows={3}
-                  maxLength={200} // Optional: limit excerpt length
+                  maxLength={200}
                 />
                 <p className="text-xs text-gray-500">
-                  Auto-generated, but you can edit it (max 200 chars).
+                  Auto-generated from content (HTML stripped), max 200 chars.
+                  You can edit.
                 </p>
               </div>
             </div>
@@ -245,7 +274,7 @@ export default function CreateBlogPage() {
                       layout="fill"
                       objectFit="cover"
                       className="rounded-md"
-                      onError={() => setImagePreview(null)} // Hide preview if image fails to load
+                      onError={() => setImagePreview(null)}
                     />
                   </div>
                 )}
@@ -290,8 +319,6 @@ export default function CreateBlogPage() {
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
             <CardFooter className="flex justify-end p-0 pt-4">
-              {" "}
-              {/* Adjusted padding */}
               <Button type="submit" className="rounded-full" disabled={loading}>
                 {loading ? "Creating..." : "Create Post"}
               </Button>

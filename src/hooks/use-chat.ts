@@ -1,13 +1,42 @@
 "use client";
 
 import { SessionHistory } from "@/types/chat";
-import { ChatSession, ChatMessage } from "@prisma/client";
+import { ChatSession, ChatMessage, MessageSender } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useState, useRef, useCallback, useEffect } from "react";
 
-const useChat = () => {
+type APIChatMessage = Omit<ChatMessage, 'createdAt'> & {
+  createdAt: string;
+};
+
+interface LoadSessionResponse {
+  messages: APIChatMessage[];
+}
+
+interface StartNewSessionResponse {
+  sessionId: string;
+  welcomeMessage: string;
+  title: string | null;
+  message: string;
+}
+
+interface UseChatReturn {
+  session: ChatSession | null;
+  chatHistory: ChatMessage[];
+  sessionList: SessionHistory[];
+  isLoading: boolean;
+  isHistoryLoading: boolean;
+  authStatus: "loading" | "authenticated" | "unauthenticated";
+  fetchSessionList: () => Promise<void>;
+  loadSession: (sessionId: string) => Promise<void>;
+  startNewSession: () => Promise<void>;
+  handleDeleteSession: (e: React.MouseEvent, sessionId: string) => Promise<void>;
+  sendMessage: (messageText: string) => Promise<void>;
+}
+
+const useChat = (): UseChatReturn => {
   const { data: authSession, status: authStatus } = useSession();
-  const currentUserId = authSession?.user?.id ?? undefined;
+  const currentUserId = authSession?.user?.id; 
 
   const [session, setSession] = useState<ChatSession | null>(null);
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
@@ -16,14 +45,13 @@ const useChat = () => {
   const [isHistoryLoading, setIsHistoryLoading] = useState(true);
   const isInitialMount = useRef(true);
 
-  // --- 1. Fetch Session List ---
   const fetchSessionList = useCallback(async () => {
     try {
       const response = await fetch(`/api/chat/sessions`);
       if (response.ok) {
-        const data = await response.json();
+        const data: SessionHistory[] = await response.json(); 
         setSessionList(
-          data.map((s: any) => ({
+          data.map((s) => ({
             ...s,
             createdAt: new Date(s.createdAt),
             updatedAt: new Date(s.updatedAt),
@@ -35,66 +63,63 @@ const useChat = () => {
     }
   }, []);
 
-  // --- 2. Load Existing Session Messages ---
-const loadSession = useCallback(
-  async (sessionId: string) => {
-    setIsHistoryLoading(true);
-    setChatHistory([]);
-    setSession(null);
+  const loadSession = useCallback(
+    async (sessionId: string) => {
+      setIsHistoryLoading(true);
+      setChatHistory([]);
+      setSession(null);
 
-    try {
-      // ✅ Correct endpoint name
-      const response = await fetch(`/api/chat/message?sessionId=${sessionId}`);
-      if (!response.ok) throw new Error("Failed to fetch messages for selected session.");
+      try {
+        const response = await fetch(`/api/chat/message?sessionId=${sessionId}`);
+        if (!response.ok) throw new Error("Failed to fetch messages for selected session.");
 
-      const data = await response.json();
+        const data = await response.json() as APIChatMessage[] | LoadSessionResponse; 
 
-      // ✅ Handles either { messages: [...] } or plain array
-      const messages = Array.isArray(data)
-        ? data
-        : Array.isArray(data.messages)
-        ? data.messages
-        : [];
+        const messages = Array.isArray(data)
+          ? data
+          : Array.isArray(data.messages)
+          ? data.messages
+          : [];
 
-      const formattedMessages = messages.map((msg) => ({
-        ...msg,
-        createdAt: new Date(msg.createdAt),
-      }));
+        const formattedMessages: ChatMessage[] = messages.map((msg) => ({
+          ...msg,
+          createdAt: new Date(msg.createdAt),
+        }));
 
-      setChatHistory(formattedMessages);
+        setChatHistory(formattedMessages);
 
-      const sessionInfo = sessionList.find((s) => s.id === sessionId);
-      setSession({
-        id: sessionId,
-        userId: currentUserId,
-        title: sessionInfo?.title ?? null,
-        status: "active",
-        createdAt: sessionInfo?.createdAt ?? new Date(),
-        updatedAt: sessionInfo?.updatedAt ?? new Date(),
-      } as ChatSession);
-    } catch (error) {
-      console.error("Error loading session messages:", error);
-      setChatHistory([
-        {
+        const sessionInfo = sessionList.find((s) => s.id === sessionId);
+        
+        const newSession: ChatSession = {
+          id: sessionId,
+          userId: currentUserId ?? null, 
+          title: sessionInfo?.title ?? null,
+          status: "active", 
+          createdAt: sessionInfo?.createdAt ? new Date(sessionInfo.createdAt) : new Date(),
+          updatedAt: sessionInfo?.updatedAt ? new Date(sessionInfo.updatedAt) : new Date(),
+        };
+        setSession(newSession);
+      } catch (error) {
+        console.error("Error loading session messages:", error);
+        
+        const errorMsg: ChatMessage = {
           id: crypto.randomUUID(),
-          sender: "ASSISTANT",
+          sessionId,
+          userId: currentUserId ?? null,
+          sender: MessageSender.ASSISTANT, 
           text: "Could not load this conversation. Please start a new chat.",
           createdAt: new Date(),
-          sessionId,
-          userId: currentUserId,
           imageUrl: null,
           suggestedAction: null,
-        } as ChatMessage,
-      ]);
-    } finally {
-      setIsHistoryLoading(false);
-    }
-  },
-  [currentUserId, sessionList]
-);
+        };
+        setChatHistory([errorMsg]);
+      } finally {
+        setIsHistoryLoading(false);
+      }
+    },
+    [currentUserId, sessionList]
+  );
 
-
-  // --- 3. Delete Session ---
   const handleDeleteSession = async (
     e: React.MouseEvent,
     sessionId: string
@@ -118,8 +143,9 @@ const loadSession = useCallback(
     }
   };
 
-  // --- 4. Start New Session ---
   const startNewSession = useCallback(async () => {
+    if (!currentUserId) return; 
+
     setIsLoading(true);
     setChatHistory([]);
     setSession(null);
@@ -131,28 +157,29 @@ const loadSession = useCallback(
         body: JSON.stringify({ userId: currentUserId }),
       });
 
-      const data = await response.json();
+      const data: StartNewSessionResponse = await response.json(); 
       if (!response.ok || !data.sessionId || !data.welcomeMessage)
         throw new Error(data.message || "Failed to start session.");
 
       const newSessionId = data.sessionId;
 
-      setSession({
+      const newSession: ChatSession = {
         id: newSessionId,
         userId: currentUserId,
         title: data.title ?? null,
         status: "active",
         createdAt: new Date(),
         updatedAt: new Date(),
-      } as ChatSession);
+      };
+      setSession(newSession);
 
       const welcomeMsg: ChatMessage = {
         id: crypto.randomUUID(),
-        sender: "ASSISTANT",
-        text: data.welcomeMessage,
-        createdAt: new Date(),
         sessionId: newSessionId,
         userId: currentUserId,
+        sender: MessageSender.ASSISTANT,
+        text: data.welcomeMessage,
+        createdAt: new Date(),
         imageUrl: null,
         suggestedAction: null,
       };
@@ -161,34 +188,32 @@ const loadSession = useCallback(
       await fetchSessionList();
     } catch (error) {
       console.error("Error starting new session:", error);
-      setChatHistory([
-        {
-          id: crypto.randomUUID(),
-          sender: "ASSISTANT",
-          text: `**ERROR:** Could not start chat. ${String(error)}`,
-          createdAt: new Date(),
-          sessionId: "",
-          userId: currentUserId,
-          imageUrl: null,
-          suggestedAction: null,
-        } as ChatMessage,
-      ]);
+      const errorMsg: ChatMessage = {
+        id: crypto.randomUUID(),
+        sessionId: "",
+        userId: currentUserId ?? null,
+        sender: MessageSender.ASSISTANT,
+        text: `**ERROR:** Could not start chat. ${String(error)}`,
+        createdAt: new Date(),
+        imageUrl: null,
+        suggestedAction: null,
+      };
+      setChatHistory([errorMsg]);
     } finally {
       setIsLoading(false);
     }
   }, [currentUserId, fetchSessionList]);
 
-  // --- 5. Send Message ---
   const sendMessage = async (messageText: string) => {
-  if (!session?.id) return;
+  if (!session?.id || !currentUserId) return;
 
   const newUserMessage: ChatMessage = {
     id: crypto.randomUUID(),
-    sender: "USER",
-    text: messageText,
-    createdAt: new Date(),
     sessionId: session.id,
     userId: currentUserId,
+    sender: MessageSender.USER,
+    text: messageText,
+    createdAt: new Date(),
     imageUrl: null,
     suggestedAction: null,
   };
@@ -205,23 +230,22 @@ const loadSession = useCallback(
       }),
     });
 
-    const data = await response.json();
+    const data: { assistantMessage: string; messageId: string; message: string; } = await response.json();
     if (!response.ok || !data.assistantMessage)
       throw new Error(data.message || "Error processing message.");
 
     const newAssistantMessage: ChatMessage = {
       id: data.messageId || crypto.randomUUID(),
-      sender: "ASSISTANT",
-      text: data.assistantMessage,
-      createdAt: new Date(),
       sessionId: session.id,
       userId: currentUserId,
+      sender: MessageSender.ASSISTANT,
+      text: data.assistantMessage,
+      createdAt: new Date(),
       imageUrl: null,
       suggestedAction: null,
     };
     setChatHistory((prev) => [...prev, newAssistantMessage]);
 
-    // 🧠 If this is the *first user message*, use it as the session title
     if (!session.title || session.title.match(/^\d{4}-\d{2}-\d{2}/)) {
       const titleSnippet = messageText
         .split(" ")
@@ -236,7 +260,6 @@ const loadSession = useCallback(
         body: JSON.stringify({ title: titleSnippet }),
       });
 
-      // locally update title
       setSession((prev) =>
         prev ? { ...prev, title: titleSnippet } : prev
       );
@@ -246,11 +269,11 @@ const loadSession = useCallback(
     console.error("Chat API error:", error);
     const errorMsg: ChatMessage = {
       id: crypto.randomUUID(),
-      sender: "ASSISTANT",
+      sessionId: session.id,
+      userId: currentUserId ?? null,
+      sender: MessageSender.ASSISTANT,
       text: `**Service Alert:** I hit an issue. Check your console for details.`,
       createdAt: new Date(),
-      sessionId: session.id,
-      userId: currentUserId,
       imageUrl: null,
       suggestedAction: null,
     };
@@ -260,14 +283,12 @@ const loadSession = useCallback(
   }
 };
 
-
-  // --- 6. Initial Mount ---
   useEffect(() => {
-    if (authStatus !== "loading" && isInitialMount.current) {
+    if (authStatus !== "loading" && isInitialMount.current && currentUserId) {
       isInitialMount.current = false;
       startNewSession();
     }
-  }, [authStatus, startNewSession]);
+  }, [authStatus, startNewSession, currentUserId]);
 
   return {
     session,

@@ -18,7 +18,7 @@ const ChatPage = () => {
     authStatus,
     loadSession,
     startNewSession,
-    fetchSessionList, // Ensure fetchSessionList is destructured here
+    fetchSessionList,
     handleDeleteSession,
     sendMessage,
   } = useChat();
@@ -43,6 +43,7 @@ const ChatPage = () => {
             onDeleteSession={handleDeleteSession}
           />
 
+          {/* TODO: this should ba an icon */}
           <div className="flex items-center space-x-3">
             <h1 className="text-xl md:text-2xl font-bold text-gray-800">
               Farm Doctor

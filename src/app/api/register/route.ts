@@ -42,7 +42,6 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error) {
-    // Handle validation and other errors
     return NextResponse.json({ message: "An error occurred" }, { status: 500 });
   }
 }

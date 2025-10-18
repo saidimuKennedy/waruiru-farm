@@ -50,6 +50,7 @@ export async function POST(req: Request) {
       {
         sessionId: newSession.id,
         welcomeMessage: WELCOME_MESSAGE,
+        title: newSession.title,
       },
       { status: 200 }
     );

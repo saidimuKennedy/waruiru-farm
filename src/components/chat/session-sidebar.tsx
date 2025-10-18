@@ -42,12 +42,12 @@ const SessionHistorySidebar: React.FC<SessionHistorySidebarProps> = ({
 
   const handleLoadSession = (sessionId: string) => {
     onLoadSession(sessionId);
-    onOpenChange(false); // Close sidebar on selection
+    onOpenChange(false); 
   };
 
   const handleNewSession = () => {
     onNewSession();
-    onOpenChange(false); // Close sidebar on selection
+    onOpenChange(false); 
   };
 
   const handleOpenChange = (open: boolean) => {

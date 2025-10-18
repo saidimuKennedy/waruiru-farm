@@ -1,6 +1,6 @@
 "use client";
 
-import MessageBubble from "@/components/message-bubble";
+import MessageBubble from "@/components/chat/message-bubble";
 import { ChatMessage } from "@/types/chat";
 import { Loader2, MessageSquare } from "lucide-react";
 import { useRef, useEffect } from "react";

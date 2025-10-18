@@ -2,8 +2,8 @@
 
 import MessageBubble from "@/components/chat/message-bubble";
 import { ChatMessage } from "@/types/chat";
-import { Loader2, MessageSquare } from "lucide-react";
 import { useRef, useEffect } from "react";
+import DiagnosingTrain from "./loading-animation";
 
 interface MessageListProps {
   chatHistory: ChatMessage[];
@@ -35,9 +35,8 @@ const MessageList: React.FC<MessageListProps> = ({
         chatHistory.length > 0 &&
         chatHistory.slice(-1)[0]?.sender === "USER" && (
           <div className="flex justify-start">
-            <div className="bg-gray-200 p-3 rounded-xl rounded-tl-none mr-auto max-w-[60%] shadow-md mb-4 text-gray-700 text-sm flex items-center space-x-2">
-              <Loader2 className="w-4 h-4 animate-spin text-green-600" />
-              <span>Farm Doctor is diagnosing...</span>
+            <div className="bg-gray-200 p-3 rounded-xl rounded-tl-none mr-auto max-w-[60%] shadow-md mb-6">
+              <DiagnosingTrain />
             </div>
           </div>
         )}

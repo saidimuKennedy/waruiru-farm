@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Waruiru Farm",
-  description: "Fresh Horticultural Produce",
+  description: "Fresh Horticultural Produce", icons: '/favicon.ico'
 };
 
 // Client Component for the persistent button (requires "use client")

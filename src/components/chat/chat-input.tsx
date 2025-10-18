@@ -1,7 +1,8 @@
 "use client";
 
-import { PlusCircle, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { PlusCircle, Loader2, Camera } from "lucide-react";
+import { useRef, useState } from "react";
+import { toast } from "sonner";
 
 interface ChatInputProps {
   onSendMessage: (text: string) => Promise<void>;
@@ -11,6 +12,8 @@ interface ChatInputProps {
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
   const [input, setInput] = useState("");
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim() && !isLoading) {
@@ -19,8 +22,31 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
     }
   };
 
-  const handleFileUpload = () => {
-    console.log("Image upload functionality is pending development!");
+  // TODO: Image Upload
+  const handleImageUpload = () => {
+    // This will be triggered when the user tries to upload an image
+    // Check if the user is a premium user
+    const isPremiumUser = false; // Replace with actual premium status check
+
+    if (!isPremiumUser) {
+      toast.info("Image upload is a premium feature. Please upgrade your plan.");
+      return;
+    }
+
+    // If premium, proceed with file input click
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      console.log("Selected file:", file.name);
+      // Here you would typically upload the file to a server
+      // and then send the image URL to onSendMessage
+      // For now, we'll just simulate sending a message with an image placeholder
+      onSendMessage(`[Image: ${file.name}]`);
+    }
+  
   };
 
   return (
@@ -32,13 +58,20 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
         {/* Camera/Upload Icon */}
         <button
           type="button"
-          onClick={handleFileUpload}
+          onClick={handleImageUpload}
           className="text-green-600 hover:text-green-600 p-2 rounded-full transition disabled:opacity-50 flex-shrink-0"
           aria-label="Upload Image"
           disabled={isLoading}
         >
-          <PlusCircle className="w-7 h-7" />
+          <Camera className="w-7 h-7"/>
         </button>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className="hidden"
+        />
 
         {/* Input Field */}
         <input

@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Loader2, PlusCircle, History, Trash2 } from "lucide-react";
+import { Loader2, PlusCircle, History, Trash2 } from "lucide-react"; // Removed Leaf, as we're using the profile pic
 import { ChatMessage, ChatSession, SessionHistory } from "@/types/chat";
 import ChatInput from "@/components/chat/chat-input";
 import useChat from "@/hooks/use-chat";
 import MessageList from "@/components/chat/message-list";
 import SessionHistorySidebar from "@/components/chat/session-sidebar";
+import Image from 'next/image'; // Import Next.js Image component
+
+// Assuming Waruiru's profile picture is in the /public folder
+const WARUIRU_PROFILE_PIC = '/farm_dr.png'; 
 
 const ChatPage = () => {
   const {
@@ -43,8 +47,15 @@ const ChatPage = () => {
             onDeleteSession={handleDeleteSession}
           />
 
-          {/* TODO: this should ba an icon */}
-          <div className="flex items-center space-x-3">
+          {/* Updated: This is Waruiru's profile picture and title */}
+          <div className="flex items-center space-x-3 mr-auto"> {/* Added mr-auto */}
+            <Image
+                src={WARUIRU_PROFILE_PIC}
+                alt="Waruiru, Farm Doctor"
+                width={40} // Adjust size as needed
+                height={40} // Adjust size as needed
+                className="rounded-full object-cover"
+            />
             <h1 className="text-xl md:text-2xl font-bold text-gray-800">
               Farm Doctor
             </h1>

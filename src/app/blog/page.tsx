@@ -2,6 +2,7 @@ import { getAllPosts } from "@/lib/blog-posts";
 import BlogContentClient from "@/components/blog-content-client";
 import { DefaultSession, getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import Image from "next/image";
 
 interface Post {
   slug: string;
@@ -21,13 +22,13 @@ const BlogPage = async () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <div
-        className="relative h-64 bg-cover bg-center flex items-center justify-center text-white"
-        style={{
-          backgroundImage:
-            "url('https://res.cloudinary.com/dq3wkbgts/image/upload/v1753168685/farmer_in_field_eojduf.png')",
-        }}
-      >
+      <div className="relative h-64 flex items-center justify-center text-white">
+        <Image
+          src="https://res.cloudinary.com/dq3wkbgts/image/upload/v1753168685/farmer_in_field_eojduf.png"
+          fill
+          alt="Farmer in a field"
+          className="object-cover"
+        />
         <div
           className="absolute inset-0 bg-black/50"
           style={{ backdropFilter: "blur(4px)" }}

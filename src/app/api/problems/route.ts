@@ -1,14 +1,20 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function GET() {
   try {
-    const problems = await prisma.problem.findMany();
-    return NextResponse.json(problems, { status: 200 });
+    const problems = await prisma.problem.findMany({
+      orderBy: {
+        title: "asc",
+      },
+    });
+    return NextResponse.json(problems);
   } catch (error) {
-    console.error("Error fetching problems:", error);
+    console.error("Failed to fetch problems:", error);
     return NextResponse.json(
-      { error: "Failed to fetch problems" },
+      { message: "Error fetching problems from the database." },
       { status: 500 }
     );
   }

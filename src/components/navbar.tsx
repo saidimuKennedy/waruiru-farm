@@ -71,6 +71,13 @@ export default function Navbar() {
               <User className="w-4 h-4 mr-2" />
               Profile
             </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push("/dashboard")}
+              className="cursor-pointer"
+            >
+              <Route className="w-4 h-4 mr-2" />
+              Dashboard
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={handleSignOut}
@@ -114,6 +121,13 @@ export default function Navbar() {
             </p>
           </div>
 
+          <Link
+            href="/dashboard"
+            className="w-full text-center bg-green-500 hover:bg-green-600 text-white rounded-full py-3 shadow-lg block"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Dashboard
+          </Link>
           <Button
             className="w-full bg-red-200 shadow-red-100 border-red-500 text-red-600 hover:bg-red-50 rounded-full py-3"
             onClick={() => {

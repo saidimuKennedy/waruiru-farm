@@ -2,13 +2,23 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Navbar from "@/components/navbar";
-import Services from "@/components/services";
-import CTASection from "@/components/CTASection";
-import AnimatedProcessSection from "@/components/process";
 import { motion } from "framer-motion";
-import ProduceShowcase from "@/components/showcase";
-import Announcement from "@/components/announcement";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const Services = dynamic(() => import("@/components/services"), { ssr: false });
+const ProduceShowcase = dynamic(() => import("@/components/showcase"), {
+  ssr: false,
+});
+const AnimatedProcessSection = dynamic(() => import("@/components/process"), {
+  ssr: false,
+});
+const CTASection = dynamic(() => import("@/components/CTASection"), {
+  ssr: false,
+});
+const Announcement = dynamic(() => import("@/components/announcement"), {
+  ssr: false,
+});
 
 const AgriTechLanding = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -55,13 +65,13 @@ const AgriTechLanding = () => {
       <section
         id="home"
         className="relative h-screen flex items-center justify-center text-white"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1675742569879-17e25e7784d7?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
       >
+        <Image
+          src="https://images.unsplash.com/photo-1675742569879-17e25e7784d7?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="farm background"
+          fill
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 text-center px-4">
           <motion.h1

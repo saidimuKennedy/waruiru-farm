@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -99,14 +100,14 @@ const AboutPage = () => {
 
   return (
     <div className="bg-white min-h-screen overflow-hidden">
-      {/* Hero Section - Redesigned with Grid */}
+      {/* Hero Section */}
       <motion.div
-        className="relative min-h-screen flex items-center justify-center py-20" // Added vertical padding
+        className="relative min-h-screen flex items-center justify-center py-20" 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        {/* Background with enhanced overlay */}
+        {/* Background */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -225,9 +226,11 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div variants={fadeInUp}>
               <div className="relative">
-                <img
+                <Image
                   src="/kennedy.png"
                   alt="Farmer Kennedy at Waruiru Farm"
+                  width={500}
+                  height={500}
                   className="rounded-3xl shadow-2xl w-full h-auto object-cover aspect-square"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-green-600 text-white p-6 rounded-2xl shadow-xl">
@@ -300,9 +303,11 @@ const AboutPage = () => {
               className="flex flex-col md:flex-row gap-10 items-center"
             >
               <div className="md:w-1/2">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1533062618053-d51e617307ec?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Placeholder for a humble beginning image
                   alt="Early days of Waruiru Farm"
+                  width={500}
+                  height={500}
                   className="rounded-3xl shadow-xl w-full h-auto object-cover aspect-video"
                 />
               </div>

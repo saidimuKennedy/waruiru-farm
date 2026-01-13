@@ -25,6 +25,8 @@ model User {
   orders        Order[]
   notifications Notification[]
   userPreference UserPreference?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Role {

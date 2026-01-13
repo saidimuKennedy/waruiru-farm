@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { categories } from "@/app/bot/page";
+import { categories } from "@/constants/bot";
 import { Search } from "lucide-react";
 
 interface SearchAndFilterProps {

@@ -9,13 +9,7 @@ import BackgroundDecorations from "@/components/bot/bg-decorations";
 import HeroSection from "@/components/bot/hero-section";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const categories = [
-  { id: "all", name: "All Problems", icon: Filter },
-  { id: "watering", name: "Watering Issues", icon: Droplets },
-  { id: "nutrients", name: "Nutrients", icon: Leaf },
-  { id: "soil", name: "Soil Health", icon: Sun },
-  { id: "disease", name: "Disease", icon: AlertTriangle },
-];
+import { categories } from "@/constants/bot";
 
 const FarmDoctor = () => {
   const [activeCard, setActiveCard] = useState<string | null>(null);

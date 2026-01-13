@@ -16,8 +16,8 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  price: z.coerce.number().min(0, "Price must be a positive number"),
-  stockQuantity: z.coerce.number().int().min(0, "Stock must be a positive integer"),
+  price: z.number().min(0, "Price must be a positive number"),
+  stockQuantity: z.number().int().min(0, "Stock must be a positive integer"),
 });
 
 export default function AddProductForm({

@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { MessageSender } from "@prisma/client";
-import { getChatHistory } from "@/lib/chat-utils";
+import { getChatHistory } from "@/lib/chat-server";
 import { callGeminiApi } from "@/lib/gemini";
 
 export async function GET(req: Request) {

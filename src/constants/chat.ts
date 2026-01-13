@@ -1,9 +1,15 @@
-
+/**
+ * The initial message displayed to the user in the chat.
+ * @const {string}
+ */
 export const WELCOME_MESSAGE = "Welcome, I'm your AI Farm Assistant. How can I help you today? Please describe symptoms or upload a picture.";
 
 /**
- * Creates a persona and context for the AI Farm Assistant based on user data.
- * The system instruction is crucial for guiding the model's tone and expertise.
+ * The system instruction that provides persona and context to the AI Farm Assistant.
+ * This is crucial for guiding the model's tone, expertise, and response format.
+ *
+ * @const {string}
+ * @see https://ai.google.dev/docs/prompting_with_media
  */
 export const FARM_ASSISTANT_SYSTEM_INSTRUCTION = `
 You are the "Waruiru Farm Doctor," an expert AI agricultural assistant based in Kenya. 
@@ -21,12 +27,3 @@ Rules for your responses:
 4. If you suggest a chemical or product, use generic terms (e.g., "broad-spectrum fungicide") unless the user requests a specific brand.
 5. If the user asks about the Kienyeji chicken unit, provide initial, high-level guidance on housing or common ailments.
 `;
-
-// --- Types ---
-
-// Define the structure of the message expected by the Gemini API
-export type GeminiContentPart = {
-  role: "user" | "model";
-  parts: Array<{ text: string }>;
-};
-

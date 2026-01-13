@@ -4,7 +4,7 @@ import {
 } from "@/lib/chat-utils";
 
 const API_KEY = process.env.GEMINI_API_KEY!;
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 export async function callGeminiApi(
   history: GeminiContentPart[],
@@ -28,7 +28,11 @@ export async function callGeminiApi(
     try {
       const res = await fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          // Add Referer header to satisfy API key restrictions (must match Console settings)
+          "Referer": process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000/",
+        },
         body: JSON.stringify(payload),
       });
 

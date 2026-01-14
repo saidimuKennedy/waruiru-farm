@@ -4,6 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Info } from "lucide-react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
+/**
+ * Displays a scrolling announcement bar at the top of the page.
+ * Automatically hides after a set timeout (60 seconds).
+ */
 export default function Announcement() {
   const [isVisible, setIsVisible] = useState(true);
 

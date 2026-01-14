@@ -1,5 +1,9 @@
 import { BotIcon, ArrowRight } from "lucide-react";
 
+/**
+ * Displays a promotional card encouraging users to use the AI assistant.
+ * Features an SVG illustration and a call-to-action button.
+ */
 const AlertCard = () => {
   return (
     <div className="text-center py-16 px-4">

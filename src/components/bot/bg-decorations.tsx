@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * Renders decorative background elements (SVGs and gradients).
+ * Adds visual flair to the page backgrounds.
+ */
 const BackgroundDecorations = () => {
   return (
     <>

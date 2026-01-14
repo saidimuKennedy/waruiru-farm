@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Financial Reports API.
+ * GET: Generates financial reports based on date range.
+ * Supports CSV download or JSON response.
+ */
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);

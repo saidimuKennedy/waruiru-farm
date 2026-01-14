@@ -20,6 +20,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+/**
+ * About Us page component.
+ * Tells the farm's story, values, achievements, and gallery.
+ */
 const AboutPage = () => {
   const values = [
     {

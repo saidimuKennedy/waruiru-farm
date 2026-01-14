@@ -9,6 +9,13 @@ interface ChatInputProps {
   isLoading: boolean;
 }
 
+/**
+ * Input area for the chat interface.
+ * Handles text input and image upload (placeholder).
+ *
+ * @param {function} onSendMessage - Callback when a message is sent.
+ * @param {boolean} isLoading - Whether the chat is currently processing a request.
+ */
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
   const [input, setInput] = useState("");
 

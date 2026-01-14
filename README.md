@@ -1,37 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Waruiru Farm Platform
 
-## Getting Started
+A modern, full-stack agricultural management platform built with Next.js 14. This application serves as both a public storefront for Waruiru Farm and a powerful internal management dashboard.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 🌍 Public Portal
+- **Landing Page**: Showcase of farm services and products.
+- **About & Contact**: Company information and inquiry forms.
+- **Quote System**: Interactive cart for requesting product quotes.
+- **Blog**: Educational content and farm updates with rich text editing.
+
+### 🤖 AI Powered Tools
+- **Farm Doctor**: An intelligent diagnostic tool for identifying crop diseases.
+- **AI Chat Assistant**: Conversational interface for general farming advice (powered by Gemini integration).
+- **Crop Analysis**: Image-based diagnosis for plants (upload and analyze).
+
+### 📊 Management Dashboard
+- **Analytics**: Real-time overview of revenue, orders, and customer growth.
+- **Inventory Management**: Track stock levels, add/edit products, and get low-stock alerts.
+- **Financial Tracking**: visualizations of revenue trends and transaction history.
+- **Reports**: Generate and download CSV reports for inventory and financials.
+- **Notifications**: System alerts for orders and inventory updates.
+
+### 🔐 Authentication & Security
+- Secure user authentication using **NextAuth.js**.
+- Role-based access control (Admin vs. User).
+- Protected API routes and dashboard pages.
+
+### 💳 Payments
+- **M-Pesa Integration**: STK Push and callback handling for mobile money payments.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/)
+- **ORM**: [Prisma](https://www.prisma.io/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Charts**: [Recharts](https://recharts.org/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Forms**: [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
+
+## 📂 Project Structure
+
+```
+src/
+├── app/                  # App Router pages and API routes
+│   ├── api/              # Backend API endpoints
+│   ├── auth/             # Authentication pages
+│   ├── blog/             # Blog pages
+│   ├── bot/              # Farm Doctor bot pages
+│   ├── chat/             # AI Chat pages
+│   ├── dashboard/        # Admin dashboard
+│   └── ...               # Public pages (about, contact, quote)
+├── components/           # Reusable UI components
+│   ├── bot/              # Bot-specific components
+│   ├── chat/             # Chat-specific components
+│   ├── dashboard/        # Dashboard widgets
+│   ├── forms/            # Form components
+│   └── ui/               # Base UI elements (buttons, inputs, etc.)
+├── lib/                  # Utility functions and configurations
+│   ├── prisma.ts         # Database client
+│   ├── auth.ts           # Auth configuration
+│   └── ...
+└── types/                # TypeScript interfaces and types
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Installation
 
-## Learn More
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/waruiru-farm.git
+   cd waruiru-farm
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Environment Setup**
+   Create a `.env` file in the root directory based on `.env.example`:
+   ```env
+   DATABASE_URL="postgresql://..."
+   NEXTAUTH_SECRET="your-secret"
+   NEXTAUTH_URL="http://localhost:3000"
+   GEMINI_API_KEY="your-gemini-key"
+   MPESA_CONSUMER_KEY="..."
+   MPESA_CONSUMER_SECRET="..."
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Database Setup**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
 
-## Deploy on Vercel
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# waruiru-farm
+## 📚 Documentation
+The codebase is fully documented with JSDoc. You can explore the `src/app/api` directory to understand the available API endpoints for:
+- Authentication (`/api/auth`)
+- Dashboard Stats (`/api/dashboard`)
+- Products & Inventory (`/api/products`, `/api/inventory`)
+- Chat & AI (`/api/chat`, `/api/gemini-analysis`)
+
+## 📄 License
+This project is licensed under the MIT License.

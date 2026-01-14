@@ -10,6 +10,11 @@ enum PostStatus {
   ARCHIVED = "ARCHIVED",
 }
 
+/**
+ * Posts API.
+ * GET: Retrieves all blog posts, ordered by date.
+ * POST: Creates a new blog post (Admin only).
+ */
 export async function GET() {
   try {
     const posts = await prisma.post.findMany({

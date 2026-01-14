@@ -16,6 +16,13 @@ interface ProductCardProps {
   onUpdateQuantity: (itemId: string, change: number) => void;
 }
 
+/**
+ * Displays a single product item with price, discount, and quantity controls.
+ *
+ * @param {ProduceItem} item - The product data.
+ * @param {number} quantity - Current quantity in cart.
+ * @param {function} onUpdateQuantity - Handler to change quantity.
+ */
 export function ProductCard({
   item,
   quantity,

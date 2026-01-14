@@ -79,6 +79,10 @@ const produceData: ProduceItem[] = [
   },
 ];
 
+/**
+ * Displays a carousel of fresh produce items.
+ * Allows users to click an item to view complete details in a modal dialog.
+ */
 export default function ProduceShowcase() {
   const [selectedProduce, setSelectedProduce] = useState<ProduceItem | null>(
     null

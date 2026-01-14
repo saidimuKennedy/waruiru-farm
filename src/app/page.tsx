@@ -20,6 +20,11 @@ const Announcement = dynamic(() => import("@/components/announcement"), {
   ssr: false,
 });
 
+/**
+ * Main landing page component.
+ * Combines various sections: Hero, Services, Produce Showcase, Process, CTA, and FAQ.
+ * Uses dynamic imports for performance optimization.
+ */
 const AgriTechLanding = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 

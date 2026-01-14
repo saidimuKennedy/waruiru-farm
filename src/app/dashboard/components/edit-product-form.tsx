@@ -21,6 +21,11 @@ const formSchema = z.object({
   stockQuantity: z.number().int().min(0, "Stock must be a positive integer"),
 });
 
+/**
+ * Form for editing an existing product.
+ * Pre-fills the form with current product data.
+ * Updates product details via the API.
+ */
 export default function EditProductForm({
   product,
   onSuccess,

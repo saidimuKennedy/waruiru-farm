@@ -11,6 +11,11 @@ interface DashboardLayout {
   showLowStockAlerts: boolean;
 }
 
+/**
+ * Main Dashboard overview page.
+ * Displays key statistics and widgets based on user preferences.
+ * Allows users to customize their dashboard layout.
+ */
 export default function DashboardPage() {
   const [layout, setLayout] = useState<DashboardLayout | null>(null);
   const [isLoading, setIsLoading] = useState(true);

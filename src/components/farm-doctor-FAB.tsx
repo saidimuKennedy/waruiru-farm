@@ -3,6 +3,10 @@
 import Link from "next/link";
 import { Bot } from "lucide-react";
 
+/**
+ * Floating Action Button (FAB) to launch the Farm Doctor AI chat.
+ * Fixed to the bottom-right corner of the screen.
+ */
 export default function FarmDoctorFAB() {
   return (
     <Link

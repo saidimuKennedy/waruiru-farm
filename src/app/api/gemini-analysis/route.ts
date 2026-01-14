@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 
+/**
+ * API route for analyzing crop images using Gemini.
+ * Receives image data and a prompt.
+ * Returns a simulated AI analysis (to be replaced with real Gemini integration).
+ */
 export async function POST(req: Request) {
   try {
     const { imageData, prompt } = await req.json();

@@ -22,6 +22,15 @@ interface ProblemCardProps {
   setActiveCard: (id: string | null) => void;
 }
 
+/**
+ * Displays a single agricultural problem card with details.
+ * Expandable to show likely causes, immediate actions, and prevention.
+ *
+ * @param {Problem} problem - The problem data.
+ * @param {number} index - Index for animation delay.
+ * @param {string | null} activeCard - ID of the currently expanded card.
+ * @param {function} setActiveCard - Function to toggle card expansion.
+ */
 const ProblemCard: React.FC<ProblemCardProps> = ({
   problem,
   index,

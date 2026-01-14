@@ -11,6 +11,14 @@ interface SearchAndFilterProps {
   setSelectedCategory: (category: string) => void;
 }
 
+/**
+ * Provides search and category filtering controls.
+ *
+ * @param {string} searchTerm - Current search text.
+ * @param {function} setSearchTerm - Function to update search text.
+ * @param {string} selectedCategory - Current selected filter category.
+ * @param {function} setSelectedCategory - Function to update category.
+ */
 const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
   searchTerm,
   setSearchTerm,

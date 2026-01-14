@@ -2,6 +2,10 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 
+/**
+ * Call to Action section inviting users to contact the farm.
+ * Displays a heading, description, and contact button.
+ */
 const CTASection = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 text-center bg-gray-50">

@@ -3,6 +3,11 @@ import prisma from "@/lib/prisma";
 import { WELCOME_MESSAGE } from "@/lib/chat-utils";
 import { MessageSender } from "@prisma/client";
 
+/**
+ * API for creating a new chat session.
+ * Handles both authenticated users (linking to their ID) and guest users (null ID).
+ * Initializes the session with a welcome message.
+ */
 export async function POST(req: Request) {
   try {
     const body = await req.json();

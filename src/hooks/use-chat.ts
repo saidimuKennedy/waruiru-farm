@@ -6,6 +6,7 @@ import { ChatSession, ChatMessage, MessageSender } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useState, useRef, useCallback, useEffect } from "react";
 
+//
 type APIChatMessage = Omit<ChatMessage, "createdAt"> & {
   createdAt: string;
 };
@@ -38,6 +39,12 @@ interface UseChatReturn {
   sendMessage: (messageText: string) => Promise<void>;
 }
 
+/**
+ * Custom hook to manage chat sessions, history, and messaging.
+ * Handles both authenticated (saved to DB) and guest (saved to sessionStorage) sessions.
+ *
+ * @returns {UseChatReturn} The chat state and control functions.
+ */
 const useChat = (): UseChatReturn => {
   const { data: authSession, status: authStatus } = useSession();
   const currentUserId = authSession?.user?.id;

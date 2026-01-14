@@ -8,6 +8,12 @@ interface MessageBubbleProps {
 
 const FARM_DOCTOR_PROFILE_PIC = '/farm_dr.png'; 
 
+/**
+ * Displays a single chat message.
+ * Differentiates styles between User and Assistant (Farm Doctor) messages.
+ *
+ * @param {ChatMessage} message - The message object to display.
+ */
 const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
     const isUser = message.sender === 'USER';
 

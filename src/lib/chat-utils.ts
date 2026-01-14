@@ -1,4 +1,7 @@
 
+/**
+ * The default welcome message sent to new users.
+ */
 export const WELCOME_MESSAGE = "Welcome, I'm your AI Farm Assistant. How can I help you today? Please describe symptoms or upload a picture.";
 
 /**

@@ -11,6 +11,10 @@ interface ImageUploadProps {
   onAnalyze: (analysis: string) => void;
 }
 
+/**
+ * Component for uploading images for analysis.
+ * Handles file selection, preview, and submission to the Gemini API.
+ */
 export default function ImageUpload({ onAnalyze }: ImageUploadProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);

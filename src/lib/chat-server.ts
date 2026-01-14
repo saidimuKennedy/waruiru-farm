@@ -2,6 +2,9 @@ import prisma from '@/lib/prisma';
 import { MessageSender } from '@prisma/client';
 
 // Define the structure of the message expected by the Gemini API
+/**
+ * Structure of a message part for the Gemini API.
+ */
 export type GeminiContentPart = {
   role: "user" | "model";
   parts: Array<{ text: string }>;

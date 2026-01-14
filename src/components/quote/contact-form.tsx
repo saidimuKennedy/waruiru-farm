@@ -34,6 +34,15 @@ type ContactFormProps = {
   form: ReturnType<typeof useForm<FormInputs>>;
 };
 
+/**
+ * Contact form for requesting a quote.
+ * Includes validation using Zod and React Hook Form.
+ *
+ * @param {boolean} isSubmitting - Form submission state.
+ * @param {number} cartItemsCount - Number of items in cart (used to disable submit if empty).
+ * @param {function} onFormSubmit - Submission handler.
+ * @param {object} form - React Hook Form instance.
+ */
 export function ContactForm({ isSubmitting, cartItemsCount, onFormSubmit, form }: ContactFormProps) {
     const { register, handleSubmit, formState: { errors } } = form;
 

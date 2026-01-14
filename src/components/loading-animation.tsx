@@ -17,6 +17,10 @@ const style = (
   `}</style>
 );
 
+/**
+ * Displays a pulsating loading logo animation.
+ * Used during global loading states.
+ */
 export default function LoadingLogo() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">

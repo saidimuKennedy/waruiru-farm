@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+/**
+ * Middleware to handle route protection.
+ * Redirects unauthenticated users trying to access checkout.
+ */
 export function middleware(request: NextRequest) {
   const session = request.cookies.get("next-auth.session-token"); 
 

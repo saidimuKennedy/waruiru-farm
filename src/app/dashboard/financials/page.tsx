@@ -13,6 +13,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import RevenueChart from "../components/revenue-chart";
 import { Skeleton } from "@/components/ui/skeleton";
 
+/**
+ * Financials dashboard page.
+ * Displays total revenue, revenue trends chart, and transaction history.
+ * Fetches financial data from the API.
+ */
 export default function FinancialsPage() {
   const [financials, setFinancials] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);

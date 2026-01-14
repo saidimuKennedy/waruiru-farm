@@ -11,6 +11,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { categories } from "@/constants/bot";
 
+/**
+ * Farm Doctor AI diagnosis page.
+ * Features a hero section with severe problems, search/filter functionality,
+ * and a grid of problem cards.
+ * Fetches problem data from the API.
+ */
 const FarmDoctor = () => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");

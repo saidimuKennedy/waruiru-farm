@@ -3,6 +3,11 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
+/**
+ * Chat Sessions API.
+ * GET: Retrieves a list of chat sessions for the authenticated user.
+ * DELETE: Deletes a specific chat session.
+ */
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);

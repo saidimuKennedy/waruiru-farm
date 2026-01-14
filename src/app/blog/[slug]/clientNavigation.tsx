@@ -9,6 +9,14 @@ interface ClientNavigationProps {
   nextPostSlug: string | null;
 }
 
+/**
+ * Navigation component for blog posts.
+ * Provides floating "Previous" and "Next" buttons to navigate between blog posts.
+ * Uses Framer Motion for animations.
+ *
+ * @param {string | null} prevPostSlug - Slug of the previous post.
+ * @param {string | null} nextPostSlug - Slug of the next post.
+ */
 export default function ClientNavigation({
   prevPostSlug,
   nextPostSlug,

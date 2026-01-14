@@ -15,6 +15,13 @@ export const metadata = {
   icons: "/favicon.ico",
 };
 
+/**
+ * Root layout component for the entire application.
+ * Includes global styles, font configuration, and common providers (Session, Toast).
+ * Wraps the application with the Navbar and Footer.
+ *
+ * @param {React.ReactNode} children - The child components to render within the layout.
+ */
 export default function RootLayout({
   children,
 }: {

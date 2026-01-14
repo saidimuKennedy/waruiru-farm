@@ -20,6 +20,11 @@ interface Notification {
   createdAt: string;
 }
 
+/**
+ * Notifications dropdown component.
+ * Displays system notifications and manages read status.
+ * Shows an unread count badge.
+ */
 export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isLoading, setIsLoading] = useState(true);

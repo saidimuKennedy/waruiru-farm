@@ -12,6 +12,11 @@ import Image from 'next/image'; // Import Next.js Image component
 // Assuming Waruiru's profile picture is in the /public folder
 const WARUIRU_PROFILE_PIC = '/farm_dr.png'; 
 
+/**
+ * Chat interface page for the AI Farm Doctor.
+ * Manages chat sessions, history, and message input.
+ * Integrates with the `useChat` hook.
+ */
 const ChatPage = () => {
   const {
     session,

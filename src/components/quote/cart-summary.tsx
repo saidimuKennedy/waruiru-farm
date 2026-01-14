@@ -13,6 +13,18 @@ type CartSummaryProps = {
   clearCart: () => void;
 };
 
+/**
+ * Displays the summary of items in the cart, including totals and tax.
+ *
+ * @param {any[]} cartItems - List of items in the cart.
+ * @param {Record<string, number>} quantities - Map of item IDs to quantities.
+ * @param {number} itemCount - Total number of items.
+ * @param {number} subtotal - Subtotal amount.
+ * @param {number} estimatedTax - Calculated tax.
+ * @param {number} total - Final total amount.
+ * @param {function} removeItem - Handler to remove an item.
+ * @param {function} clearCart - Handler to clear the cart.
+ */
 export function CartSummary({
   cartItems,
   quantities,

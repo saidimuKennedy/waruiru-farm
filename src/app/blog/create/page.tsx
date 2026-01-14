@@ -33,6 +33,11 @@ enum PostStatus {
   ARCHIVED = "ARCHIVED",
 }
 
+/**
+ * Page for creating new blog posts.
+ * Accessible only to admin users.
+ * Uses a rich text editor (TinyMCE) for content creation.
+ */
 export default function CreateBlogPage() {
   const router = useRouter();
   const { data: session, status } = useSession();

@@ -5,6 +5,11 @@ import StatCard from "./stat-card";
 import StatCardSkeleton from "./stat-card-skeleton";
 import { DollarSign, ShoppingCart, Package, Users } from "lucide-react";
 
+/**
+ * Component to display key dashboard statistics.
+ * Fetches data from the dashboard stats API.
+ * Shows revenue, orders, inventory value, and new customers.
+ */
 export default function DashboardStats() {
   const [stats, setStats] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);

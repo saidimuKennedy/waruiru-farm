@@ -11,6 +11,10 @@ interface StatCardProps {
   icon: React.ReactNode;
 }
 
+/**
+ * Reusable card component for displaying a single statistic.
+ * Shows a title, value, and an icon.
+ */
 export default function StatCard({ title, value, icon }: StatCardProps) {
   return (
     <Card>

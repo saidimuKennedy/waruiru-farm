@@ -17,6 +17,11 @@ const quoteRequestSchema = z.object({
     .min(1, { message: "At least one item must be in the cart" }),
 });
 
+/**
+ * Quote API.
+ * POST: Processes a quote request.
+ * Validates input, calculates totals including tax, creates a Quote record, and returns the breakdown.
+ */
 export async function POST(request: Request) {
   try {
     const body = await request.json();

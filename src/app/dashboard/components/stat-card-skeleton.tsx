@@ -1,6 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+/**
+ * Loading skeleton for the StatCard component.
+ * Used while dashboard statistics are being fetched.
+ */
 export default function StatCardSkeleton() {
   return (
     <Card>

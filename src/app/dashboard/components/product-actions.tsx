@@ -9,6 +9,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 
+/**
+ * Dropdown menu for product actions (Edit, Delete).
+ * Provides actionable options for each product in the list.
+ */
 export default function ProductActions({ productId }: { productId: string }) {
   const handleEdit = () => {
     // Handle edit logic

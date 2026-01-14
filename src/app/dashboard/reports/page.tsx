@@ -13,6 +13,11 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+/**
+ * Reports generation page.
+ * Allows users to generate and download Financial and Inventory reports.
+ * Supports CSV export (PDF pending).
+ */
 export default function ReportsPage() {
   const [reportType, setReportType] = useState("financial");
   const [startDate, setStartDate] = useState("");

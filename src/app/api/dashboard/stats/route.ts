@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Dashboard Stats API.
+ * GET: Retrieves aggregated statistics for the dashboard (Revenue, Orders, Inventory Value, Customers).
+ */
 export async function GET() {
   try {
     // These are placeholder calculations.

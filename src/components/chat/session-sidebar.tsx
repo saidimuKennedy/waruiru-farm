@@ -26,6 +26,21 @@ interface SessionHistorySidebarProps {
   onDeleteSession: (e: React.MouseEvent, sessionId: string) => void;
 }
 
+/**
+ * Sidebar component for managing chat sessions.
+ * Allows creating new sessions, switching between history, and deleting sessions.
+ *
+ * @param {boolean} isOpen - Whether the sidebar sheet is open.
+ * @param {function} onOpenChange - Callback to toggle sidebar visibility.
+ * @param {SessionHistory[]} sessionList - List of past chat sessions.
+ * @param {string | null | undefined} currentSessionId - ID of the active session.
+ * @param {boolean} isLoading - Whether the app is currently loading data.
+ * @param {string} authStatus - Current authentication status (loading, authenticated, unauthenticated).
+ * @param {function} onLoadSession - Callback to load a specific session.
+ * @param {function} onNewSession - Callback to start a new session.
+ * @param {function} fetchSessionList - Callback to refresh the session list.
+ * @param {function} onDeleteSession - Callback to delete a session.
+ */
 const SessionHistorySidebar: React.FC<SessionHistorySidebarProps> = ({
   isOpen,
   onOpenChange,

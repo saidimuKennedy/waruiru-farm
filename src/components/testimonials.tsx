@@ -19,6 +19,9 @@ const testimonials = [
   },
 ];
 
+/**
+ * Section displaying customer testimonials.
+ */
 export default function Testimonials() {
   return (
     <section className="bg-white">

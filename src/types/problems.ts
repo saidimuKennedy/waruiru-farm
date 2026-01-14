@@ -1,5 +1,8 @@
 import { ProblemSeverity } from "@prisma/client";
 
+/**
+ * Represents a diagnosed agricultural problem.
+ */
 export interface Problem {
   id: string;
   title: string;

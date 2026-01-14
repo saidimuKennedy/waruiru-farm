@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Products API.
+ * GET: Retrieves all products with their categories.
+ * POST: Creates a new product.
+ */
 export async function GET() {
   try {
     const products = await prisma.product.findMany({

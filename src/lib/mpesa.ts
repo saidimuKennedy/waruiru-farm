@@ -10,6 +10,10 @@ const MPESA_AUTH_URL = process.env.MPESA_AUTH_URL!; // Use sandbox for dev, chan
 let cachedToken: string | null = null;
 let tokenExpiry: number | null = null;
 
+/**
+ * Generates a timestamp in the format YYYYMMDDHHmmss required by M-Pesa API.
+ * @returns {string} The formatted timestamp.
+ */
 export function getTimestamp(): string {
   const date = new Date();
   const year = date.getFullYear();
@@ -21,11 +25,24 @@ export function getTimestamp(): string {
   return `${year}${month}${day}${hour}${minute}${second}`;
 }
 
+/**
+ * Generates the password required for M-Pesa STK Push.
+ * Base64 encoded string of Shortcode + Passkey + Timestamp.
+ *
+ * @param {string} timestamp - The current timestamp.
+ * @returns {string} The base64 encoded password.
+ */
 export function generatePassword(timestamp: string): string {
   const str = `${MPESA_SHORTCODE}${MPESA_PASSKEY}${timestamp}`;
   return Buffer.from(str).toString('base64');
 }
 
+/**
+ * Retrieves a valid OAuth access token from M-Pesa API.
+ * Uses in-memory caching to reuse tokens until expiry.
+ *
+ * @returns {Promise<string>} The access token.
+ */
 export async function getAccessToken(): Promise<string> {
   const now = Date.now();
 

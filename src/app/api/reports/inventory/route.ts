@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Inventory Reports API.
+ * GET: Generates inventory reports listing all products.
+ * Supports CSV download or JSON response.
+ */
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);

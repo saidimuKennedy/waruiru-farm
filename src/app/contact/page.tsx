@@ -25,6 +25,10 @@ const ContactSchema = z.object({
   message: z.string().min(1, { message: "Message is required." }),
 });
 
+/**
+ * Contact Us page component.
+ * Displays contact information, a contact form (via EmailJS), and a location map.
+ */
 const ContactPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

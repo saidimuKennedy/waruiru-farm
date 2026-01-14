@@ -21,6 +21,9 @@ const clients = [
   },
 ];
 
+/**
+ * Displays a logo cloud of trusted clients/partners.
+ */
 export default function Clients() {
   return (
     <div className="bg-gray-100">

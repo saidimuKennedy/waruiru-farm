@@ -1,5 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
+/**
+ * Represents a blog post structure.
+ */
 export interface Post {
   slug: string;
   title: string;
@@ -41,7 +44,7 @@ async function getPostsFromDB(): Promise<Post[]> {
       excerpt: post.excerpt,
       date: post.createdAt,
       author: post.author,
-      imageUrl: post.imageUrl, // Adjust field name based on your schema
+      imageUrl: post.imageUrl,
       content: post.content,
     }));
   } catch (error) {
@@ -73,6 +76,12 @@ async function getPostBySlugFromDB(slug: string): Promise<Post | null> {
   }
 }
 
+/**
+ * Fetches all blog posts from the database or API.
+ * Uses direct DB access during build time and API/DB fallback at runtime.
+ *
+ * @returns {Promise<Post[]>} List of all blog posts.
+ */
 export async function getAllPosts(): Promise<Post[]> {
   // During build, use direct DB access
   if (process.env.NEXT_PHASE === "phase-production-build") {
@@ -97,6 +106,12 @@ export async function getAllPosts(): Promise<Post[]> {
   }
 }
 
+/**
+ * Fetches a single blog post by its slug.
+ *
+ * @param {string} slug - The unique slug of the post.
+ * @returns {Promise<Post | null>} The post object or null if not found.
+ */
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   // During build, use direct DB access
   if (process.env.NEXT_PHASE === "phase-production-build") {

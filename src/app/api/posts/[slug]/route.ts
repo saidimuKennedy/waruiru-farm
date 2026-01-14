@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Single Post API.
+ * GET: Retrieves a specific blog post by its slug.
+ */
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }

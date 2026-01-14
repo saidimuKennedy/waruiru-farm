@@ -11,6 +11,10 @@ interface ProblemListProps {
   setActiveCard: (id: string | null) => void;
 }
 
+/**
+ * Renders a grid of ProblemCard components.
+ * Handles empty states by showing NoResults.
+ */
 const ProblemList: React.FC<ProblemListProps> = ({
   problems,
   activeCard,

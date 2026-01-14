@@ -10,6 +10,12 @@ interface MessageListProps {
   isLoading: boolean;
 }
 
+/**
+ * Renders the list of chat messages and auto-scrolls to the bottom.
+ *
+ * @param {ChatMessage[]} chatHistory - The array of messages to display.
+ * @param {boolean} isLoading - Whether a response is being generated (shows loading animation).
+ */
 const MessageList: React.FC<MessageListProps> = ({
   chatHistory,
   isLoading,

@@ -14,6 +14,15 @@ interface TemplateCardProps {
   className?: string;
 }
 
+/**
+ * Reusable card component for displaying service details.
+ *
+ * @param {string} title - Title of the card.
+ * @param {string} description - description text.
+ * @param {string} imageUrl - URL of the image.
+ * @param {React.CSSProperties} style - Optional inline styles.
+ * @param {string} className - Optional CSS classes.
+ */
 const TemplateCard = ({
   title,
   description,
@@ -70,6 +79,10 @@ const cardFanLayout = [
   { rotate: 12, translateX: 90, translateY: 15, z: 20 },
 ];
 
+/**
+ * Displays a fan-like arrangement of service cards.
+ * Interactive on desktop (hover to expand), stacked grid on mobile.
+ */
 export function CardFan() {
   return (
     <div className="relative h-auto md:h-[350px] w-full max-w-[500px] mx-auto">
@@ -111,6 +124,10 @@ export function CardFan() {
   );
 }
 
+/**
+ * Section highlighting the farm's key services.
+ * Features an interactive card fan layout.
+ */
 function Services() {
   return (
     <section

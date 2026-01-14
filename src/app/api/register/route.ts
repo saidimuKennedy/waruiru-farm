@@ -13,6 +13,11 @@ const userSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters." }),
 });
 
+/**
+ * Registration API.
+ * POST: Registers a new user.
+ * Validates input, hashed password, creates User record, and returns success message.
+ */
 export async function POST(request: Request) {
   try {
     const body = await request.json();

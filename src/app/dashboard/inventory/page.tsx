@@ -15,6 +15,11 @@ import ProductList from "../components/product-list";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Product } from "@prisma/client";
 
+/**
+ * Inventory management page.
+ * Lists all products, allows adding new products via a modal form.
+ * Fetches product list from the API.
+ */
 export default function InventoryPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);

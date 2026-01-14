@@ -9,6 +9,11 @@ interface BlogPostPageProps {
   }>;
 }
 
+/**
+ * Individual blog post page.
+ * Displays the full content of a blog post identified by its slug.
+ * Includes navigation to previous and next posts.
+ */
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
 

@@ -20,6 +20,11 @@ const formSchema = z.object({
   stockQuantity: z.number().int().min(0, "Stock must be a positive integer"),
 });
 
+/**
+ * Form for adding a new product to the inventory.
+ * Uses react-hook-form and Zod validation.
+ * Submits data to the products API.
+ */
 export default function AddProductForm({
   onSuccess,
 }: {

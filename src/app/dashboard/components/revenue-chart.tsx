@@ -18,6 +18,10 @@ interface RevenueChartProps {
   }[];
 }
 
+/**
+ * Chart component displaying revenue over time.
+ * Uses Recharts to render a line chart.
+ */
 export default function RevenueChart({ data }: RevenueChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>

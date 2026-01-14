@@ -6,6 +6,11 @@ import { Product } from "@prisma/client";
 import { AlertTriangle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
+/**
+ * Alert component defining low stock notifications.
+ * Fetches low stock items from the inventory API.
+ * Displays a list of products that need restocking.
+ */
 export default function LowStockAlert() {
   const [lowStockProducts, setLowStockProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);

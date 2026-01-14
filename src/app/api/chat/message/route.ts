@@ -51,6 +51,11 @@ export async function GET(req: Request) {
   }
 }
 
+/**
+ * Chat Message API.
+ * GET: Retrieves messages for a specific session.
+ * POST: Sends a user message, stores it, calls Gemini AI, and stores/returns the response.
+ */
 export async function POST(req: Request) {
   try {
     const { sessionId, userMessage, imageUrl } = await req.json();

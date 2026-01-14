@@ -23,6 +23,10 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
+/**
+ * Global navigation bar component.
+ * Handles responsive menu, user authentication status, and navigation links.
+ */
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();

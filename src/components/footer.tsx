@@ -11,6 +11,9 @@ import Image from "next/image";
 import Link from "next/link";
 import NewsletterForm from "./forms/newsLetterForm";
 
+/**
+ * Global footer component displaying links, contact info, and newsletter form.
+ */
 export default function Footer() {
   const navLinks = [
     { label: "Home", href: "/" },

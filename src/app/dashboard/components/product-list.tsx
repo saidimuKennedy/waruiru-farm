@@ -16,6 +16,10 @@ interface ProductListProps {
   products: Product[];
 }
 
+/**
+ * Component to display a table of products.
+ * Shows name, price, stock, and actions for each product.
+ */
 export default function ProductList({ products }: ProductListProps) {
   return (
     <Card>

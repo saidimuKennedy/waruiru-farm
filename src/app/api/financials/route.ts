@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Financials API.
+ * GET: Retrieves transactions, total revenue, and daily revenue for charting.
+ * Aggregates data from the database.
+ */
 export async function GET() {
   try {
     const transactions = await prisma.transaction.findMany({

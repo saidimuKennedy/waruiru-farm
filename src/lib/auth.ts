@@ -6,6 +6,10 @@ import type { AuthOptions } from "next-auth";
 
 const prisma = new PrismaClient();
 
+/**
+ * NextAuth configuration options.
+ * Defines adapters, providers, callbacks, and session handling.
+ */
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [

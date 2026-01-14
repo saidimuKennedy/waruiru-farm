@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * Low Stock API.
+ * GET: Retrieves a list of products with stock below threshold (10).
+ */
 export async function GET() {
   try {
     const LOW_STOCK_THRESHOLD = 10; // Define your low stock threshold

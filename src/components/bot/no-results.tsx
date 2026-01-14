@@ -3,6 +3,10 @@
 import React from "react";
 import { BotIcon, ArrowRight } from "lucide-react";
 
+/**
+ * Displayed when no problems match the user's search or filter criteria.
+ * Encourages the user to use the AI assistant instead.
+ */
 const NoResults = () => {
   return (
     <div className="text-center py-16 px-4">

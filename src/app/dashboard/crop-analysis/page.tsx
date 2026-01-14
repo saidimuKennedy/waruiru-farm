@@ -5,6 +5,11 @@ import ImageUpload from "./components/image-upload";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
+/**
+ * Crop Analysis page.
+ * Allows users to upload plant images for AI diagnosis.
+ * Displays the analysis result from the AI.
+ */
 export default function CropAnalysisPage() {
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
 

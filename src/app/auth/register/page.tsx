@@ -19,6 +19,11 @@ const FormSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters." }),
 });
 
+/**
+ * User registration page.
+ * Allows new users to create an account.
+ * Redirects to the login page upon successful registration.
+ */
 export default function RegisterPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);

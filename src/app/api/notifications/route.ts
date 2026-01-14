@@ -3,6 +3,11 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
+/**
+ * Notifications API.
+ * GET: Fetches unread notifications for the authenticated user.
+ * POST: Marks a specific notification as read.
+ */
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);

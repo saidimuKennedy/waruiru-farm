@@ -2,6 +2,12 @@ import { NextResponse } from "next/server";
 import { callGeminiApi } from "@/lib/gemini";
 import { GeminiContentPart } from "@/lib/chat-utils";
 
+/**
+ * Guest Chat API.
+ * Handles chat messages for unauthenticated users.
+ * Does not store chat history in the database.
+ * Calls Gemini directly with the provided history context.
+ */
 export async function POST(req: Request) {
   try {
     const { history = [], userMessage } = await req.json();

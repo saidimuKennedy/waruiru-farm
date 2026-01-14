@@ -40,6 +40,12 @@ interface ProcessStepProps {
   index: number;
 }
 
+/**
+ * Renders a single step in the farming process with scroll animations.
+ *
+ * @param {ProcessStepData} step - Data for the specific step.
+ * @param {number} index - Index of the step (used for alternating layout).
+ */
 const ProcessStep: React.FC<ProcessStepProps> = ({ step, index }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -149,6 +155,10 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ step, index }) => {
   );
 };
 
+/**
+ * Section displaying the farm-to-table process steps.
+ * Orchestrates entrance animations for the section header and steps.
+ */
 const AnimatedProcessSection = () => {
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-50px" });

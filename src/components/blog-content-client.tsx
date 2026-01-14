@@ -16,6 +16,13 @@ interface BlogContentClientProps {
   posts: Post[];
   isAdmin: boolean;
 }
+/**
+ * Client-side component to display a grid of blog posts.
+ * Includes admin controls to create new posts.
+ *
+ * @param {Post[]} posts - Array of blog posts to display.
+ * @param {boolean} isAdmin - Whether the current user has admin privileges.
+ */
 const BlogContentClient = ({ posts, isAdmin }: BlogContentClientProps) => {
   return (
     <div className="bg-gray-50 min-h-screen">

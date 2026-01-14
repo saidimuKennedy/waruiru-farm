@@ -14,6 +14,11 @@ interface Post {
   excerpt: string;
 }
 
+/**
+ * Main Blog page component.
+ * Fetches all blog posts and renders the client-side content viewer.
+ * Checks via NextAuth if the current user is an admin.
+ */
 const BlogPage = async () => {
   const posts: Post[] = await getAllPosts();
   const session = await getServerSession(authOptions);

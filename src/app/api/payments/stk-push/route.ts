@@ -7,6 +7,12 @@ const XXXXXXXXX1 = process.env.MPESA_SHORTCODE!;
 const XXXXXXXXX2 = process.env.MPESA_CALLBACK_URL!;
 const XXXXXXXXX3 = process.env.MPESA_STK_PUSH_URL!; // Use sandbox for dev
 
+/**
+ * M-Pesa STK Push API.
+ * Initiates an M-Pesa payment request to the user's phone.
+ * Generates the password and timestamp required by Daraja API.
+ * Updates the order with the CheckoutRequestID.
+ */
 export async function POST(req: Request) {
   try {
     const { orderId, amount, phoneNumber } = await req.json();

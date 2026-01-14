@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { Search, TestTube, Brain, MessageSquare } from "lucide-react";
 
+/**
+ * Animated loading indicator showing the AI's "thought process".
+ * Cycles through relevant icons (Search, TestTube, Brain, MessageSquare).
+ */
 const DiagnosingTrain: React.FC = () => {
   const icons = [Search, TestTube, Brain, MessageSquare];
   const [offset, setOffset] = useState(0);

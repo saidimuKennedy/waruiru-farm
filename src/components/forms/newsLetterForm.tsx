@@ -2,6 +2,10 @@
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
 
+/**
+ * Newsletter subscription form.
+ * Uses emailjs to send subscription requests.
+ */
 export default function NewsletterForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<

@@ -24,6 +24,10 @@ interface DashboardSettingsProps {
   }) => void;
 }
 
+/**
+ * Dashboard Settings modal component.
+ * Allows users to toggle visibility of stats cards and low stock alerts.
+ */
 export default function DashboardSettings({
   currentLayout,
   onSave,

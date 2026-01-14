@@ -9,6 +9,12 @@ interface HeroSectionProps {
   problem: Problem | undefined;
 }
 
+/**
+ * Component to display the main hero section for a specific problem.
+ * Shows problem title, cause, time to fix, and difficulty.
+ *
+ * @param {Problem | undefined} problem - The problem data to display.
+ */
 const HeroSection: React.FC<HeroSectionProps> = ({ problem }) => {
   if (!problem) {
     return null;

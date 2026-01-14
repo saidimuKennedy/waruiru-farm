@@ -3,6 +3,11 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
+/**
+ * Dashboard Preferences API.
+ * GET: Retrieves user-specific dashboard settings (layout).
+ * PUT: Updates user dashboard settings.
+ */
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);

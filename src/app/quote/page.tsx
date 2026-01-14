@@ -96,6 +96,11 @@ const useProducts = () => {
   return { produceItems, loadingProducts, error };
 };
 
+/**
+ * Quote Request page.
+ * Allows users to browse products, add them to a cart, and request a price quote.
+ * Requires user authentication.
+ */
 export default function QuotePage() {
   const { data: session } = useSession();
   const router = useRouter();

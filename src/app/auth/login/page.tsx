@@ -20,6 +20,11 @@ const FormSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters" }),
 });
 
+/**
+ * User login page.
+ * Handles credential-based authentication using NextAuth.
+ * Provides a link to the registration page.
+ */
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);

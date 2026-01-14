@@ -10,6 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Notifications from "./components/notifications";
 
+/**
+ * Layout component for the Dashboard section.
+ * Includes a sidebar/topbar navigation specific to dashboard features
+ * like Financials, Inventory, Automation, etc.
+ */
 export default function DashboardLayout({
   children,
 }: {

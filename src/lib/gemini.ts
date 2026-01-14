@@ -6,6 +6,13 @@ import {
 const API_KEY = process.env.GEMINI_API_KEY!;
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
+/**
+ * Calls the Google Gemini API to generate a response based on chat history.
+ *
+ * @param {GeminiContentPart[]} history - The conversation history.
+ * @param {string} newMessageText - The latest user message.
+ * @returns {Promise<string>} The generated response text.
+ */
 export async function callGeminiApi(
   history: GeminiContentPart[],
   newMessageText: string
